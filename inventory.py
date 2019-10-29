@@ -20,7 +20,8 @@ class Inventory:
         self._path_to_csv = path_to_csv
         self._sep = sep
         self.data = None
-    
+        self.subset = None
+
     def load_data(self):
         """Load data farom csv
         """
@@ -31,8 +32,11 @@ class Inventory:
         self.data.dropna(axis=1, thresh=len(self.data) - 1, inplace=True)
 
     def filter_multiple(self, filters):
-        """Apply a list of filters to the dataframe.
-        The filters are linked logically with AND
+        """Filter data frame and create subset
+        
+        Apply a list of filters to the dataframe. The filters are linked 
+        logically with AND. This function creates a subset and returns it. 
+        The subset is also stored as property 'subset' of this class
         
         Arguments:
             df {Dataframe} -- source dataframe
@@ -41,10 +45,10 @@ class Inventory:
         Returns:
             Dataframe -- Filtered dataframe
         """
-        f = self.data
+        self.subset = self.data
         for filter in filters:
-            f = self.filter_data(f, filter[0], filter[1])
-        return f
+            self.subset = self.filter_data(self.subset, filter[0], filter[1])
+        return self.subset
 
     def filter_data(self, data, cat, val):
         """Filter Pandas dataframe for a given column value
@@ -58,7 +62,36 @@ class Inventory:
             Dataframe -- Filtered dataframe
         """
         return data[data[cat] == val]
+    
+    def restore_orignal_order(self, subset=False):
+        """Restore orignal order of columns
         
+        Keyword Arguments:
+            subset {bool} -- If True, the orignal order of the subset is restored (default: {False})
+        """
+        if(subset):
+            self.subset.sort_index(ascending=True, inplace=True)
+        else:
+            self.data.sort_index(ascending=True, inplace=True)
+
+    def sort_by_category(self, cat, subset=False, ascending=True):
+        """Sort data by category
+        
+        Arguments:
+            cat {String} -- Cartegory string to sort data by
+        
+        Keyword Arguments:
+            subset {bool} -- If true sort subset (default: {False})
+            ascending {bool} -- If True sort in ascending order (default: {True})
+        """
+        if(subset):
+            self.subset.sort_values(cat, axis=0, ascending=ascending, inplace=True)
+        else:
+            self.data.sort_values(cat, axis=0, ascending=ascending, inplace=True)
+
+    def change_asset_location(self, row_idx, new_loc):
+        pass
+
 # class debug
 pd.set_option('display.max_rows', 100)
 pd.set_option('display.max_columns', 7)
@@ -66,9 +99,7 @@ pd.set_option('display.width', 1000)
 
 inv = Inventory(r'./Bestand_Material_15_10_2019.csv')
 inv.load_data()
+inv.sort_by_category('SLoc')
 print(inv.data)
-
-
-
-
-    
+inv.restore_orignal_order()
+print(inv.data)

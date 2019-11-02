@@ -53,12 +53,17 @@ class ObdTool(QtWidgets.QMainWindow):
         mod = self.inventoryTable.model()
         mod.layoutAboutToBeChanged.emit()
         mod._inventory.filter_multiple([("", value)])
+        filter_label = QtWidgets.QLabel()
+        filter_label.setText(value)
+        self.active_filter_layout.addWidget(filter_label)
         mod.layoutChanged.emit()
 
     def reset_filters(self):
         mod = self.inventoryTable.model()
         mod.layoutAboutToBeChanged.emit()
         mod._inventory.reset_filters()
+        for i in reversed(range(self.active_filter_layout.count())): 
+            self.active_filter_layout.itemAt(i).widget().deleteLater()
         mod.layoutChanged.emit()
 
 def run_main_app(inventory):

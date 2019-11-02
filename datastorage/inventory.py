@@ -99,14 +99,8 @@ class Inventory:
             Dataframe -- Filtered dataframe
         """
         try:
-            return data[data.apply(lambda row: row.astype(str).str.contains(val, case=False).any(), axis=1)]
-#            for cat in data:
-#                if data[cat].dtype == 'datetime64[ns]':
-#                    dt = pd.to_datetime(val)
-#                    filter_data = data[data[cat] >= dt]
-#                else:
-#                    filter_data = data[data[cat].str.contains(val, case=False)]
-#            return filter_data
+            return data[data.apply(lambda row: row.astype(str).
+                        str.contains(val, case=False).any(), axis=1)]
         except Exception as e:
             print(e)
 

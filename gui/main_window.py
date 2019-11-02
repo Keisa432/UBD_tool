@@ -4,13 +4,15 @@ from .panda_table import PandasModel
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.uic import loadUi
 
-class ObdTool(QtWidgets.QDialog):
+class ObdTool(QtWidgets.QMainWindow):
     def __init__(self, inventory):
         super(ObdTool, self).__init__()
+        self._inventory = inventory
         loadUi(r'./gui/main_window.ui', self)
         self.setWindowTitle('OBD Tool')
-        self.init_inventory_table(inventory)
-        self.init_filter_ui()
+        self.init_toolbar_menu()
+        #self.init_inventory_table(inventory)
+        #self.init_filter_ui()
 
     def init_inventory_table(self, inventory):
         self.inventoryTable.setSortingEnabled(True)
@@ -31,6 +33,15 @@ class ObdTool(QtWidgets.QDialog):
         mod._inventory.restore_orignal_order()
         self.inventoryTable.horizontalHeader().setSortIndicator(-1, 0)
         mod.layoutChanged.emit()
+    
+    def init_toolbar_menu(self):
+        self.actionLoad.triggered.connect(self.get_file)
+
+    def get_file(self):
+        fname = QtWidgets.QFileDialog.getOpenFileName()
+        self._inventory.load_data(fname[0])
+        self.init_inventory_table(self._inventory)
+        self.init_filter_ui()
 
     def init_filter_ui(self):
         mod = self.inventoryTable.model()

@@ -9,9 +9,8 @@ pd.set_option('display.max_columns', 7)
 pd.set_option('display.width', 1000)
 
 tracker = ChangeTracker()
-inv = Inventory(r'C:/Users/Dominik/python/panda_test/Bestand_Material_15_10_2019.csv')
+inv = Inventory()
 inv.attach(tracker)
-inv.load_data()
 run_main_app(inv)
 
 

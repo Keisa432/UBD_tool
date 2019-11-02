@@ -11,14 +11,13 @@ class Inventory:
     Returns:
         Inventory -- Inventory class
     """
-    def __init__(self, path_to_csv, sep=';'):
+    def __init__(self, sep=';'):
         """Inventory constructor
 
         Arguments:
             path_to_csv {string} -- Path of the csv file
             sep {string} -- seperator used in the csv file. default=";"
         """
-        self._path_to_csv = path_to_csv
         self._sep = sep
         self.original_data = None
         self.working_set = None
@@ -47,11 +46,11 @@ class Inventory:
         for observer in self.observers:
             observer(data)
 
-    def load_data(self):
+    def load_data(self, path):
         """Load data farom csv
         """
         try:
-            self.original_data = pd.read_csv(self._path_to_csv, self._sep)
+            self.original_data = pd.read_csv(path, self._sep)
             # convert timestamp string to date time
             self.original_data['SLED/BBD'] = pd.to_datetime(self.original_data ['SLED/BBD'])
             # drop last column with nan values

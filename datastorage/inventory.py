@@ -99,7 +99,8 @@ class Inventory:
             Dataframe -- Filtered dataframe
         """
         try:
-            return data[data[cat] == val]
+            print(data[cat].dtype)
+            return data[data[cat].str.contains(val)]
         except Exception as e:
             print(e)
     

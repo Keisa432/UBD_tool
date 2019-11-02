@@ -114,6 +114,7 @@ class Inventory:
 
 
     def change_data_entry(self, row_idx, column, new_data):
-        self.notify(Change(self.working_set.iloc[row_idx], column, new_data))
-        self.working_set.loc[(self.working_set.index.get_loc(row_idx)-1), column] = new_data
-
+        row = self.working_set.iloc[row_idx]
+        self.notify(Change(row, column, new_data))
+        self.working_set.loc[row.name, column] = new_data
+        self.original_data.loc[row.name, column] = new_data

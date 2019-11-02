@@ -1,4 +1,5 @@
 import pandas as pd
+from .change import Change
 
 class Inventory:
     """Inventory class
@@ -15,12 +16,36 @@ class Inventory:
 
         Arguments:
             path_to_csv {string} -- Path of the csv file
-            sep {string} -- seperator used in the csv file. default=";"   
+            sep {string} -- seperator used in the csv file. default=";"
         """
         self._path_to_csv = path_to_csv
         self._sep = sep
         self.original_data = None
         self.working_set = None
+        self.observers = []
+
+    def attach(self, observer):
+        """Add observer
+        
+        This function registers the observer. It will be notified
+        any time a change to the data stored is made.
+
+        Arguments:
+            observer {Any} -- Observer
+        """
+        self.observers.append(observer)
+
+    def notify(self, data):
+        """Notify all registered observers
+        
+        Call all registered observers. Notifing them that
+        something in the inventory changed.
+
+        Arguments:
+            data {[type]} -- Contains the change made as well as the old value
+        """
+        for observer in self.observers:
+            observer(data)
 
     def load_data(self):
         """Load data farom csv
@@ -88,7 +113,7 @@ class Inventory:
         self.working_set.sort_values(cat, axis=0, ascending=ascending, inplace=True)
 
 
-    def change_asset_location(self, row_idx, new_loc):
-        pass
-
+    def change_data_entry(self, row_idx, column, new_data):
+        self.notify(Change(self.working_set.iloc[row_idx], column, new_data))
+        self.working_set.loc[(self.working_set.index.get_loc(row_idx)-1), column] = new_data
 

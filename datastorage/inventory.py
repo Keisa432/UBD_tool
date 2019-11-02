@@ -99,11 +99,17 @@ class Inventory:
             Dataframe -- Filtered dataframe
         """
         try:
-            print(data[cat].dtype)
-            return data[data[cat].str.contains(val)]
+            return data[data.apply(lambda row: row.astype(str).str.contains(val, case=False).any(), axis=1)]
+#            for cat in data:
+#                if data[cat].dtype == 'datetime64[ns]':
+#                    dt = pd.to_datetime(val)
+#                    filter_data = data[data[cat] >= dt]
+#                else:
+#                    filter_data = data[data[cat].str.contains(val, case=False)]
+#            return filter_data
         except Exception as e:
             print(e)
-    
+
     def restore_orignal_order(self):
         """Restore orignal order of columns
         

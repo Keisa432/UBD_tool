@@ -44,21 +44,15 @@ class ObdTool(QtWidgets.QMainWindow):
         self.init_filter_ui()
 
     def init_filter_ui(self):
-        mod = self.inventoryTable.model()
-        headers = mod._inventory.working_set.columns.tolist()
-        self.comboBox.clear()
-        self.comboBox.addItems(headers)
-        width = self.comboBox.minimumSizeHint().width()
-        self.comboBox.view().setMinimumWidth(width)
         self.add_filter.clicked.connect(self.apply_filter)
         self.clear_filters.clicked.connect(self.reset_filters)
     
     def apply_filter(self):
-        column = str(self.comboBox.currentText())
         value = str(self.lineEdit.text())
+        self.lineEdit.setText('')
         mod = self.inventoryTable.model()
         mod.layoutAboutToBeChanged.emit()
-        mod._inventory.filter_multiple([(column, value)])
+        mod._inventory.filter_multiple([("", value)])
         mod.layoutChanged.emit()
 
     def reset_filters(self):

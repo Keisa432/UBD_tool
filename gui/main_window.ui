@@ -14,21 +14,11 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QComboBox" name="comboBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>121</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>30</y>
+      <x>10</x>
+      <y>40</y>
       <width>131</width>
       <height>21</height>
      </rect>
@@ -57,7 +47,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Clear filters</string>
+     <string>Reset</string>
     </property>
    </widget>
    <widget class="QTableView" name="inventoryTable">

@@ -50,13 +50,16 @@ class Inventory:
     def load_data(self):
         """Load data farom csv
         """
-        self.original_data = pd.read_csv(self._path_to_csv, self._sep)
-        # convert timestampo string to date time
-        self.original_data['SLED/BBD'] = pd.to_datetime(self.original_data ['SLED/BBD'])
-        # drop last column with nan values
-        self.original_data.dropna(axis=1, thresh=len(self.original_data) - 1, inplace=True)
-        #set working set to original data
-        self.working_set = self.original_data
+        try:
+            self.original_data = pd.read_csv(self._path_to_csv, self._sep)
+            # convert timestamp string to date time
+            self.original_data['SLED/BBD'] = pd.to_datetime(self.original_data ['SLED/BBD'])
+            # drop last column with nan values
+            self.original_data.dropna(axis=1, thresh=len(self.original_data) - 1, inplace=True)
+            #set working set to original data
+            self.working_set = self.original_data
+        except Exception as e:
+            print(e)
 
     def reset_filters(self):
         """Reset filters
@@ -93,7 +96,10 @@ class Inventory:
         Returns:
             Dataframe -- Filtered dataframe
         """
-        return data[data[cat] == val]
+        try:
+            return data[data[cat] == val]
+        except Exception as e:
+            print(e)
     
     def restore_orignal_order(self):
         """Restore orignal order of columns
@@ -110,11 +116,36 @@ class Inventory:
         Keyword Arguments:
             ascending {bool} -- If True sort in ascending order (default: {True})
         """
-        self.working_set.sort_values(cat, axis=0, ascending=ascending, inplace=True)
-
+        try:
+            self.working_set.sort_values(cat, axis=0, ascending=ascending, inplace=True)
+        except Exception as e:
+            print(e)
 
     def change_data_entry(self, row_idx, column, new_data):
-        row = self.working_set.iloc[row_idx]
-        self.notify(Change(row, column, new_data))
-        self.working_set.loc[row.name, column] = new_data
-        self.original_data.loc[row.name, column] = new_data
+        """Change value of entry identified by row_idx and
+        column
+        
+        Arguments:
+            row_idx {Number} -- Index of row
+            column {String} -- Column of row
+            new_data {Any} -- new value
+        """
+        try:
+            row = self.working_set.iloc[row_idx]
+            self.notify(Change(row, column, new_data))
+            self.working_set.loc[row.name, column] = new_data
+            self.original_data.loc[row.name, column] = new_data
+        except Exception as e:
+            print(e)
+
+    def replace_row(self, row):
+        """Replace row with same name as row
+        
+        Arguments:
+            row {Dataframe} -- new row to insert
+        """
+        try:
+            self.working_set.loc[row.name] = row
+            self.original_data.loc[row.name] = row
+        except:
+            pass

@@ -61,6 +61,9 @@ class Inventory:
         except Exception as e:
             print(e)
 
+    def get_column_name(self, column):
+        return self.working_set.columns.tolist()[column]
+ 
     def reset_filters(self):
         """Reset filters
         
@@ -132,9 +135,10 @@ class Inventory:
         """
         try:
             row = self.working_set.iloc[row_idx]
-            self.notify(Change(row, column, new_data))
-            self.working_set.loc[row.name, column] = new_data
-            self.original_data.loc[row.name, column] = new_data
+            col_name = self.working_set.columns.tolist()[column]
+            self.notify(Change(row, col_name, new_data))
+            self.working_set.iloc[row_idx, column] = new_data
+            self.original_data.iloc[row_idx, column] = new_data
         except Exception as e:
             print(e)
 

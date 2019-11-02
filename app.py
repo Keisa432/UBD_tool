@@ -1,5 +1,6 @@
 from datastorage import Inventory
 from datastorage import ChangeTracker
+from gui import run_main_app
 import pandas as pd
 
 # class debug
@@ -11,16 +12,6 @@ tracker = ChangeTracker()
 inv = Inventory(r'C:/Users/Dominik/python/panda_test/Bestand_Material_15_10_2019.csv')
 inv.attach(tracker)
 inv.load_data()
-inv.sort_by_category('SLoc')
-inv.filter_multiple([('SLoc', 'Franz')])
-inv.change_data_entry(0, 'SLoc', 'Dominik')
-inv.change_data_entry(32, 'SLoc', 'Dominik')
-inv.reset_filters()
-
-last = tracker.remove_last_change()
-inv.replace_row(last.row)
-for change in tracker.changes():
-    print(change)
-    print(inv.original_data.loc[change.row.name])
+run_main_app(inv)
 
 

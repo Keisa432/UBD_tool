@@ -14,6 +14,7 @@ class UbdTool(QtWidgets.QMainWindow):
         loadUi(r'./gui/main_window.ui', self)
         self.setWindowTitle('UBD Tool')
         self.init_toolbar_menu()
+        self.init_filter_ui()
         self.csv_loaded.connect(self.populate_ui)
 
     def init_inventory_table(self, inventory):
@@ -46,14 +47,20 @@ class UbdTool(QtWidgets.QMainWindow):
 
     def populate_ui(self):
         self.init_inventory_table(self._inventory)
-        self.init_filter_ui()
         mod = self.inventoryTable.model()
         mod.data_changed.connect(self.print_change)
 
     def init_filter_ui(self):
         self.add_filter.clicked.connect(self.apply_filter)
         self.clear_filters.clicked.connect(self.reset_filters)
+        self.colorBox.stateChanged.connect(self.toggle_colors)
     
+    def toggle_colors(self):
+        model = self.inventoryTable.model()
+        model.layoutAboutToBeChanged.emit()
+        model.colors_enabled = not model.colors_enabled
+        model.layoutChanged.emit()
+
     def apply_filter(self):
         value = str(self.lineEdit.text())
         self.lineEdit.setText('')
@@ -78,9 +85,9 @@ class UbdTool(QtWidgets.QMainWindow):
        headers = change.row.index.tolist()
        headers.append(" ")
        headers.append("new")
-       self.changeTableWidget.setHorizontalHeaderLabels(headers)
-       count = self.changeTableWidget.rowCount()
-       self.changeTableWidget.insertRow(count, change.get_change())
+       #self.changeTableWidget.setHorizontalHeaderLabels(headers)
+       #count = self.changeTableWidget.rowCount()
+       #self.changeTableWidget.insertRow(count, change.get_change())
        #self.changeTabWidget.addItem(str(change))
 
 def run_main_app(inventory, tracker):

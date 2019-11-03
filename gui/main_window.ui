@@ -113,6 +113,19 @@
        <layout class="QHBoxLayout" name="active_filter_layout"/>
       </widget>
      </widget>
+     <widget class="QCheckBox" name="colorBox">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>20</y>
+        <width>81</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Show colors</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">

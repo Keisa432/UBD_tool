@@ -6,6 +6,8 @@ import pandas as pd
 class PandasModel(QtCore.QAbstractTableModel):
     data_changed = QtCore.pyqtSignal()
     sled_bbd_offset = 5
+    colors_enabled = False
+
     def __init__(self, inventory, parent=None): 
         QtCore.QAbstractTableModel.__init__(self, parent=parent)
         self._inventory = inventory
@@ -31,7 +33,7 @@ class PandasModel(QtCore.QAbstractTableModel):
 
         if not index.isValid():
             return QtCore.QVariant()
-        elif role == QtCore.Qt.BackgroundRole:
+        elif role == QtCore.Qt.BackgroundRole and self.colors_enabled:
             return self._check_date(index)
         elif role != QtCore.Qt.DisplayRole:
             return QtCore.QVariant()

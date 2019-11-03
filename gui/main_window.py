@@ -4,15 +4,17 @@ from .panda_table import PandasModel
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.uic import loadUi
 
-class ObdTool(QtWidgets.QMainWindow):
-    def __init__(self, inventory):
-        super(ObdTool, self).__init__()
+class UbdTool(QtWidgets.QMainWindow):
+    csv_loaded = QtCore.pyqtSignal()
+
+    def __init__(self, inventory, tracker):
+        super(UbdTool, self).__init__()
         self._inventory = inventory
+        self._tracker = tracker
         loadUi(r'./gui/main_window.ui', self)
-        self.setWindowTitle('OBD Tool')
+        self.setWindowTitle('UBD Tool')
         self.init_toolbar_menu()
-        #self.init_inventory_table(inventory)
-        #self.init_filter_ui()
+        self.csv_loaded.connect(self.populate_ui)
 
     def init_inventory_table(self, inventory):
         self.inventoryTable.setSortingEnabled(True)
@@ -40,8 +42,13 @@ class ObdTool(QtWidgets.QMainWindow):
     def get_file(self):
         fname = QtWidgets.QFileDialog.getOpenFileName()
         self._inventory.load_data(fname[0])
+        self.csv_loaded.emit()
+
+    def populate_ui(self):
         self.init_inventory_table(self._inventory)
         self.init_filter_ui()
+        mod = self.inventoryTable.model()
+        mod.data_changed.connect(self.print_change)
 
     def init_filter_ui(self):
         self.add_filter.clicked.connect(self.apply_filter)
@@ -65,9 +72,19 @@ class ObdTool(QtWidgets.QMainWindow):
         for i in reversed(range(self.active_filter_layout.count())): 
             self.active_filter_layout.itemAt(i).widget().deleteLater()
         mod.layoutChanged.emit()
+    
+    def print_change(self):
+       change = self._tracker.get_last_change()
+       headers = change.row.index.tolist()
+       headers.append(" ")
+       headers.append("new")
+       self.changeTableWidget.setHorizontalHeaderLabels(headers)
+       count = self.changeTableWidget.rowCount()
+       self.changeTableWidget.insertRow(count, change.get_change())
+       #self.changeTabWidget.addItem(str(change))
 
-def run_main_app(inventory):
+def run_main_app(inventory, tracker):
     app=QtWidgets.QApplication(sys.argv)
-    widget= ObdTool(inventory)
+    widget= UbdTool(inventory, tracker)
     widget.show()
     sys.exit(app.exec_())

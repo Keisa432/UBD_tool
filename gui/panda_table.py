@@ -1,10 +1,15 @@
 from PyQt5 import QtCore
+from PyQt5 import QtGui
 from datastorage import Inventory
+import pandas as pd
 
-class PandasModel(QtCore.QAbstractTableModel): 
+class PandasModel(QtCore.QAbstractTableModel):
+    data_changed = QtCore.pyqtSignal()
+    sled_bbd_offset = 5
     def __init__(self, inventory, parent=None): 
         QtCore.QAbstractTableModel.__init__(self, parent=parent)
         self._inventory = inventory
+     
 
     def headerData(self, section, orientation, role=QtCore.Qt.DisplayRole):
         if role != QtCore.Qt.DisplayRole:
@@ -23,13 +28,27 @@ class PandasModel(QtCore.QAbstractTableModel):
                 return QtCore.QVariant()
 
     def data(self, index, role=QtCore.Qt.DisplayRole):
-        if role != QtCore.Qt.DisplayRole:
-            return QtCore.QVariant()
 
         if not index.isValid():
             return QtCore.QVariant()
+        elif role == QtCore.Qt.BackgroundRole:
+            return self._check_date(index)
+        elif role != QtCore.Qt.DisplayRole:
+            return QtCore.QVariant()
 
         return QtCore.QVariant(str(self._inventory.working_set.iloc[index.row(), index.column()]))
+
+    def _check_date(self, index):
+        header = self._inventory.working_set.columns.tolist()[self.sled_bbd_offset]
+        color = QtCore.QVariant()
+        today = pd.to_datetime('today')
+        difference = self._inventory.working_set.iloc[index.row(), self.sled_bbd_offset] - today
+        if difference.days < 90:
+            color = QtGui.QBrush(QtCore.Qt.red)
+        elif difference.days < 365:
+            color = QtGui.QBrush(QtCore.Qt.yellow)
+
+        return color
 
     def setData(self, index, value, role):
         if hasattr(value, 'toPyObject'):
@@ -42,6 +61,7 @@ class PandasModel(QtCore.QAbstractTableModel):
            # if dtype != object:
            #     value = None if value == '' else dtype.type(value)
         self._inventory.change_data_entry(index.row(), index.column(), value)
+        self.data_changed.emit()
         return True
 
     def flags(self, index):

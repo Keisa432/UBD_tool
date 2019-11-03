@@ -1,3 +1,5 @@
+import pandas as pd
+
 class Change:
     """Change class
     
@@ -11,10 +13,17 @@ class Change:
         self.changed_column = changed_column
         self.change_value = changed_value
 
-    def __str__(self):
+    def get_change(self):
         """Returns string representation of the change. For debugging purposes.
         
         Returns:
             String -- String representaion of the change
         """
-        return f'Changed value in row {self.row.name}: {self.changed_column} {self.row.at[self.changed_column]} -> {self.change_value}'
+        l = []
+        str_row = self.row.apply(str)
+        for col in self.row.index.tolist():
+            if col != self.changed_column:
+                l.append(str_row[col])
+        l.append(str_row.at[self.changed_column])
+        l.append(self.change_value)
+        return l

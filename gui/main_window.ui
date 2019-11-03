@@ -6,83 +6,180 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>820</width>
+    <height>617</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>UBD Tool</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../Downloads/star.ico</normaloff>../../../../Downloads/star.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>131</width>
-      <height>21</height>
+      <x>0</x>
+      <y>0</y>
+      <width>811</width>
+      <height>581</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QPushButton" name="add_filter">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>70</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
+    <property name="currentIndex">
+     <number>0</number>
     </property>
-    <property name="text">
-     <string>Add filter</string>
+    <property name="tabBarAutoHide">
+     <bool>true</bool>
     </property>
-   </widget>
-   <widget class="QPushButton" name="clear_filters">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>70</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Reset</string>
-    </property>
-   </widget>
-   <widget class="QTableView" name="inventoryTable">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>100</y>
-      <width>641</width>
-      <height>441</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>20</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Active Filters</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>50</y>
-      <width>321</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="active_filter_layout"/>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Data</string>
+     </attribute>
+     <widget class="QTableView" name="inventoryTable">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>681</width>
+        <height>441</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="add_filter">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>70</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add filter</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="clear_filters">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>70</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Reset</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>10</y>
+        <width>391</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Active filters</string>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="horizontalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>371</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="active_filter_layout"/>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Changes</string>
+     </attribute>
+     <widget class="QTableWidget" name="changeTableWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>641</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="columnCount">
+       <number>12</number>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Material</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Material Desc</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Unrestr.</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Batch</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>SLoc</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>SLoc new</string>
+       </property>
+      </column>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -90,7 +187,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>820</width>
      <height>21</height>
     </rect>
    </property>
@@ -99,13 +196,27 @@
      <string>File</string>
     </property>
     <addaction name="actionLoad"/>
+    <addaction name="actionSave_CSV_file"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionLoad">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../Downloads/load.jpg</normaloff>../../../../Downloads/load.jpg</iconset>
+   </property>
    <property name="text">
     <string>Load CSV file</string>
+   </property>
+  </action>
+  <action name="actionSave_CSV_file">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../Downloads/save.jpg</normaloff>../../../../Downloads/save.jpg</iconset>
+   </property>
+   <property name="text">
+    <string>Save CSV file</string>
    </property>
   </action>
  </widget>

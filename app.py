@@ -11,6 +11,6 @@ pd.set_option('display.width', 1000)
 tracker = ChangeTracker()
 inv = Inventory()
 inv.attach(tracker)
-run_main_app(inv)
+run_main_app(inv, tracker)
 
 

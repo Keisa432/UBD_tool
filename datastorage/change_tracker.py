@@ -30,6 +30,12 @@ class ChangeTracker:
         else:
             return None
 
+    def get_last_change(self):
+        if len(self._changes) > 0:
+            return self._changes[len(self._changes)-1]
+        else:
+            return None
+
     def changes(self):
         for change in self._changes:
             yield change

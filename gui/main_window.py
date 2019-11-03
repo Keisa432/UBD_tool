@@ -39,11 +39,16 @@ class UbdTool(QtWidgets.QMainWindow):
     
     def init_toolbar_menu(self):
         self.actionLoad.triggered.connect(self.get_file)
+        self.actionSave.triggered.connect(self.save_file)
 
     def get_file(self):
-        fname = QtWidgets.QFileDialog.getOpenFileName()
-        self._inventory.load_data(fname[0])
+        fname, _ = QtWidgets.QFileDialog.getOpenFileName()
+        self._inventory.load_data(fname)
         self.csv_loaded.emit()
+
+    def save_file(self):
+        fname, _ = QtWidgets.QFileDialog.getSaveFileName(self, 'Save UBD file', '','CSV (*.csv);;All Files (*);;')
+        self._inventory.save_data(fname)
 
     def populate_ui(self):
         self.init_inventory_table(self._inventory)

@@ -7,10 +7,11 @@ class PandasModel(QtCore.QAbstractTableModel):
     data_changed = QtCore.pyqtSignal()
     sled_bbd_offset = 5
     colors_enabled = False
-
+    ROW_LOAD_COUNT = 15
     def __init__(self, inventory, parent=None): 
         QtCore.QAbstractTableModel.__init__(self, parent=parent)
         self._inventory = inventory
+        self._rows_loaded = PandasModel.ROW_LOAD_COUNT
      
 
     def headerData(self, section, orientation, role=QtCore.Qt.DisplayRole):
@@ -70,10 +71,28 @@ class PandasModel(QtCore.QAbstractTableModel):
         return (QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
 
     def rowCount(self, parent=QtCore.QModelIndex()): 
-        return len(self._inventory.working_set.index)
+        if len(self._inventory.working_set.index) <= self._rows_loaded:
+            return len(self._inventory.working_set.index)
+        else:
+            return self._rows_loaded
 
     def columnCount(self, parent=QtCore.QModelIndex()): 
         return len(self._inventory.working_set.columns)
+
+    def canFetchMore(self, index=QtCore.QModelIndex):
+        if len(self._inventory.working_set.index) > self._rows_loaded:
+            return True
+        else:
+            return False
+    
+    def fetchMore(self, index=QtCore.QModelIndex):
+        remainder = len(self._inventory.working_set.index) - self._rows_loaded
+        itemNum = min(remainder, PandasModel.ROW_LOAD_COUNT)
+        self.layoutAboutToBeChanged.emit()
+        self.beginInsertRows(QtCore.QModelIndex(), self._rows_loaded, self._rows_loaded + itemNum - 1)
+        self._rows_loaded += itemNum
+        self.endInsertRows()
+        self.layoutChanged.emit()
 
     def sort(self, column, order):
         if(column is not -1):

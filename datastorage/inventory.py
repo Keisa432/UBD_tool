@@ -59,7 +59,11 @@ class Inventory:
             self.working_set = self.original_data
         except Exception as e:
             print(e)
-
+    def save_data(self, path):
+        try:
+            self.original_data.to_csv(path, sep=self._sep, index=False)
+        except Exception as e:
+            print(e)
     def get_column_name(self, column):
         return self.working_set.columns.tolist()[column]
  

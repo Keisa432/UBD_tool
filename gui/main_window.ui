@@ -110,7 +110,14 @@
          <height>51</height>
         </rect>
        </property>
-       <layout class="QHBoxLayout" name="active_filter_layout"/>
+       <layout class="QHBoxLayout" name="active_filter_layout">
+        <property name="spacing">
+         <number>3</number>
+        </property>
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinimumSize</enum>
+        </property>
+       </layout>
       </widget>
      </widget>
      <widget class="QCheckBox" name="colorBox">
@@ -209,7 +216,7 @@
      <string>File</string>
     </property>
     <addaction name="actionLoad"/>
-    <addaction name="actionSave_CSV_file"/>
+    <addaction name="actionSave"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -223,7 +230,7 @@
     <string>Load CSV file</string>
    </property>
   </action>
-  <action name="actionSave_CSV_file">
+  <action name="actionSave">
    <property name="icon">
     <iconset>
      <normaloff>../../../../Downloads/save.jpg</normaloff>../../../../Downloads/save.jpg</iconset>

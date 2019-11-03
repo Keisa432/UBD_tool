@@ -11,7 +11,9 @@ class UbdTool(QtWidgets.QMainWindow):
         super(UbdTool, self).__init__()
         self._inventory = inventory
         self._tracker = tracker
-        loadUi(r'./gui/main_window.ui', self)
+        abs_path = os.path.dirname(os.path.abspath(sys.argv[0]))
+        ui_path = os.path.join(abs_path,"gui", "main_window.ui")
+        loadUi(ui_path, self)
         self.setWindowTitle('UBD Tool')
         self.init_toolbar_menu()
         self.init_filter_ui()

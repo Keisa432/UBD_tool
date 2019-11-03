@@ -53,18 +53,23 @@ class UbdTool(QtWidgets.QMainWindow):
     def populate_ui(self):
         self.init_inventory_table(self._inventory)
         mod = self.inventoryTable.model()
+        mod.colors_enabled = self.colorBox.isChecked()
         mod.data_changed.connect(self.print_change)
 
     def init_filter_ui(self):
-        self.add_filter.clicked.connect(self.apply_filter)
+        self.lineEdit.returnPressed.connect(self.apply_filter)
         self.clear_filters.clicked.connect(self.reset_filters)
         self.colorBox.stateChanged.connect(self.toggle_colors)
+        self.hFilterLayout.addStretch()
     
     def toggle_colors(self):
-        model = self.inventoryTable.model()
-        model.layoutAboutToBeChanged.emit()
-        model.colors_enabled = not model.colors_enabled
-        model.layoutChanged.emit()
+        try:
+            model = self.inventoryTable.model()
+            model.layoutAboutToBeChanged.emit()
+            model.colors_enabled = not model.colors_enabled
+            model.layoutChanged.emit()
+        except Exception as e:
+            print(e)
 
     def apply_filter(self):
         value = str(self.lineEdit.text())
@@ -73,16 +78,25 @@ class UbdTool(QtWidgets.QMainWindow):
         mod.layoutAboutToBeChanged.emit()
         mod._inventory.filter_multiple([("", value)])
         filter_label = QtWidgets.QLabel()
+        filter_label.setMinimumSize(30,30)
+        filter_label.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         filter_label.setText(value)
-        self.active_filter_layout.addWidget(filter_label)
+        filter_label.adjustSize()
+        filter_label.setFrameShape(QtWidgets.QFrame.WinPanel)
+        filter_label.setFrameShadow(QtWidgets.QFrame.Raised)
+        filter_label.setAlignment(QtCore.Qt.AlignTop)
+        self.hFilterLayout.insertWidget(self.hFilterLayout.count()-1, filter_label)
         mod.layoutChanged.emit()
 
     def reset_filters(self):
         mod = self.inventoryTable.model()
         mod.layoutAboutToBeChanged.emit()
         mod._inventory.reset_filters()
-        for i in reversed(range(self.active_filter_layout.count())): 
-            self.active_filter_layout.itemAt(i).widget().deleteLater()
+        for i in reversed(range(self.hFilterLayout.count())):
+            try:
+                self.hFilterLayout.itemAt(i).widget().deleteLater()
+            except:
+                continue
         mod.layoutChanged.emit()
     
     def print_change(self):

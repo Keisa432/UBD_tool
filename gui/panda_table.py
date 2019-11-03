@@ -8,6 +8,7 @@ class PandasModel(QtCore.QAbstractTableModel):
     sled_bbd_offset = 5
     colors_enabled = False
     ROW_LOAD_COUNT = 15
+
     def __init__(self, inventory, parent=None): 
         QtCore.QAbstractTableModel.__init__(self, parent=parent)
         self._inventory = inventory

@@ -60,11 +60,25 @@ class Inventory:
         except Exception as e:
             print(e)
     def save_data(self, path):
+        """Save data to csv
+        
+        Arguments:
+            path {String} -- Path where CSV should be save to
+        """
         try:
             self.original_data.to_csv(path, sep=self._sep, index=False)
         except Exception as e:
             print(e)
+
     def get_column_name(self, column):
+        """get column name
+        
+        Arguments:
+            column {int} -- Index of column
+        
+        Returns:
+            string -- name of column
+        """
         return self.working_set.columns.tolist()[column]
  
     def reset_filters(self):

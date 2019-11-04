@@ -1,4 +1,5 @@
 import pandas as pd
+from utils import log_msg
 from .change import Change
 
 class Inventory:
@@ -58,7 +59,8 @@ class Inventory:
             #set working set to original data
             self.working_set = self.original_data
         except Exception as e:
-            print(e)
+            log_msg(__name__, 2, e)
+
     def save_data(self, path):
         """Save data to csv
         
@@ -68,7 +70,7 @@ class Inventory:
         try:
             self.original_data.to_csv(path, sep=self._sep, index=False)
         except Exception as e:
-            print(e)
+            log_msg(__name__, 2, e)
 
     def get_column_name(self, column):
         """get column name
@@ -120,7 +122,7 @@ class Inventory:
             return data[data.apply(lambda row: row.astype(str).
                         str.contains(val, case=False).any(), axis=1)]
         except Exception as e:
-            print(e)
+            log_msg(__name__, 2, e)
 
     def restore_orignal_order(self):
         """Restore orignal order of columns
@@ -140,7 +142,7 @@ class Inventory:
         try:
             self.working_set.sort_values(cat, axis=0, ascending=ascending, inplace=True)
         except Exception as e:
-            print(e)
+            log_msg(__name__, 2, e)
 
     def change_data_entry(self, row_idx, column, new_data):
         """Change value of entry identified by row_idx and
@@ -158,7 +160,7 @@ class Inventory:
             self.working_set.iloc[row_idx, column] = new_data
             self.original_data.iloc[row_idx, column] = new_data
         except Exception as e:
-            print(e)
+            log_msg(__name__, 2, e)
 
     def replace_row(self, row):
         """Replace row with same name as row

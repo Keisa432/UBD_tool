@@ -6,6 +6,7 @@ import pandas as pd
 class PandasModel(QtCore.QAbstractTableModel):
     data_changed = QtCore.pyqtSignal()
     sled_bbd_offset = 5
+    sloc_offset = 3
     colors_enabled = False
     ROW_LOAD_COUNT = 15
 
@@ -69,7 +70,12 @@ class PandasModel(QtCore.QAbstractTableModel):
         return True
 
     def flags(self, index):
-        return (QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
+        flags = (QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
+
+        if index.column() == PandasModel.sloc_offset:
+            flags |= (QtCore.Qt.ItemIsEditable)
+        return flags
+
 
     def rowCount(self, parent=QtCore.QModelIndex()): 
         if len(self._inventory.working_set.index) <= self._rows_loaded:

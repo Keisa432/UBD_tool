@@ -2,6 +2,7 @@ import sys
 import os
 from utils import log_msg
 from .panda_table import PandasModel
+from .change_widget import QChangeWidget
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.uic import loadUi
 
@@ -104,13 +105,11 @@ class UbdTool(QtWidgets.QMainWindow):
     
     def print_change(self):
        change = self._tracker.get_last_change()
-       headers = change.row.index.tolist()
-       headers.append(" ")
-       headers.append("new")
-       #self.changeTableWidget.setHorizontalHeaderLabels(headers)
-       #count = self.changeTableWidget.rowCount()
-       #self.changeTableWidget.insertRow(count, change.get_change())
-       #self.changeTabWidget.addItem(str(change))
+       changeWidget = QChangeWidget(change.get_change())
+       listWidget = QtWidgets.QListWidgetItem(self.changeListWidget)
+       listWidget.setSizeHint(changeWidget.sizeHint())
+       self.changeListWidget.addItem(listWidget)
+       self.changeListWidget.setItemWidget(listWidget, changeWidget)
 
 def run_main_app(inventory, tracker):
     app=QtWidgets.QApplication(sys.argv)

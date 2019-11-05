@@ -19,11 +19,20 @@ class Change:
         Returns:
             String -- String representaion of the change
         """
-        l = []
+        l = {}
+        o = l['original'] = {}
         str_row = self.row.apply(str)
+
         for col in self.row.index.tolist():
-            if col != self.changed_column:
-                l.append(str_row[col])
-        l.append(str_row.at[self.changed_column])
-        l.append(self.change_value)
+                o[col] = str_row.at[col]
+
+        c = l['changes'] = {}
+        c[self.changed_column] = self.change_value
+
         return l
+    
+    def __str__(self):
+        print_row = self.row
+        print_row["new " + self.changed_column] = self.change_value
+       
+        return str(print_row)

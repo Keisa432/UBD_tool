@@ -22,6 +22,7 @@ class Inventory:
         self._sep = sep
         self.original_data = None
         self.working_set = None
+        self.active_filters = []
         self.observers = []
 
     def attach(self, observer):
@@ -82,7 +83,12 @@ class Inventory:
             string -- name of column
         """
         return self.working_set.columns.tolist()[column]
- 
+
+    def delete_filter(self, text):
+        self.active_filters.remove(("", text))
+        self.reset_filters()
+        self.filter_multiple(self.active_filters)
+
     def reset_filters(self):
         """Reset filters
         
@@ -104,6 +110,8 @@ class Inventory:
             Dataframe -- Filtered dataframe
         """
         for filter in filters:
+            if filter not in self.active_filters:
+                self.active_filters.append(filter)
             self.working_set = self.filter_data(self.working_set, filter[0], filter[1])
         return self.working_set
 

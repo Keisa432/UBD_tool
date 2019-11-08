@@ -3,6 +3,7 @@ import os
 from utils import log_msg
 from .panda_table import PandasModel
 from .change_widget import QChangeWidget
+from .filter_label import FilterLabel
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.uic import loadUi
 
@@ -81,16 +82,16 @@ class UbdTool(QtWidgets.QMainWindow):
         mod = self.inventoryTable.model()
         mod.layoutAboutToBeChanged.emit()
         mod._inventory.filter_multiple([("", value)])
-        filter_label = QtWidgets.QLabel()
-        filter_label.setMinimumSize(30,30)
-        filter_label.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        filter_label.setText(value)
-        filter_label.adjustSize()
-        filter_label.setFrameShape(QtWidgets.QFrame.WinPanel)
-        filter_label.setFrameShadow(QtWidgets.QFrame.Raised)
-        filter_label.setAlignment(QtCore.Qt.AlignTop)
+        filter_label = FilterLabel(value)
+        filter_label.delete_filter.connect(self.delete_filter)
         self.hFilterLayout.insertWidget(self.hFilterLayout.count()-1, filter_label)
         mod.layoutChanged.emit()
+    
+    def delete_filter(self, value):
+       mod = self.inventoryTable.model()
+       mod.layoutAboutToBeChanged.emit()
+       mod._inventory.delete_filter(value)
+       mod.layoutChanged.emit()
 
     def reset_filters(self):
         mod = self.inventoryTable.model()

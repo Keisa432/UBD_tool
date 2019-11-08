@@ -1,84 +1,84 @@
-2019-11-05 21:19:36,040 DEBUG PyQt5.uic.uiparser uiname is MainWindow
-2019-11-05 21:19:36,041 DEBUG PyQt5.uic.uiparser toplevel widget is UbdTool
-2019-11-05 21:19:36,041 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,042 DEBUG PyQt5.uic.properties setting property windowTitle
-2019-11-05 21:19:36,042 DEBUG PyQt5.uic.properties setting property windowIcon
-2019-11-05 21:19:36,047 DEBUG PyQt5.uic.uiparser push UbdTool MainWindow
-2019-11-05 21:19:36,048 DEBUG PyQt5.uic.uiparser push QWidget centralwidget
-2019-11-05 21:19:36,048 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,049 DEBUG PyQt5.uic.properties setting property currentIndex
-2019-11-05 21:19:36,049 DEBUG PyQt5.uic.properties setting property tabBarAutoHide
-2019-11-05 21:19:36,049 DEBUG PyQt5.uic.uiparser push QTabWidget tabWidget
-2019-11-05 21:19:36,050 DEBUG PyQt5.uic.uiparser push QWidget tab
-2019-11-05 21:19:36,054 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,054 DEBUG PyQt5.uic.uiparser push QTableView inventoryTable
-2019-11-05 21:19:36,054 DEBUG PyQt5.uic.uiparser pop widget QTableView inventoryTable
-2019-11-05 21:19:36,054 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002268193F798>
-2019-11-05 21:19:36,055 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,055 DEBUG PyQt5.uic.properties setting property text
-2019-11-05 21:19:36,055 DEBUG PyQt5.uic.uiparser push QPushButton clear_filters
-2019-11-05 21:19:36,055 DEBUG PyQt5.uic.uiparser pop widget QPushButton clear_filters
-2019-11-05 21:19:36,056 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002268193F798>
-2019-11-05 21:19:36,056 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,056 DEBUG PyQt5.uic.properties setting property sizePolicy
-2019-11-05 21:19:36,056 DEBUG PyQt5.uic.properties setting property layoutDirection
-2019-11-05 21:19:36,056 DEBUG PyQt5.uic.properties setting property title
-2019-11-05 21:19:36,057 DEBUG PyQt5.uic.properties setting property flat
-2019-11-05 21:19:36,057 DEBUG PyQt5.uic.properties setting property checkable
-2019-11-05 21:19:36,057 DEBUG PyQt5.uic.uiparser push QGroupBox activeFiltersBox
-2019-11-05 21:19:36,057 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,057 DEBUG PyQt5.uic.uiparser push QWidget horizontalLayoutWidget
-2019-11-05 21:19:36,057 DEBUG PyQt5.uic.properties setting property pyuicMargins
-2019-11-05 21:19:36,058 DEBUG PyQt5.uic.uiparser push QHBoxLayout hFilterLayout
-2019-11-05 21:19:36,058 DEBUG PyQt5.uic.uiparser pop layout QHBoxLayout hFilterLayout
-2019-11-05 21:19:36,058 DEBUG PyQt5.uic.uiparser pop widget QWidget horizontalLayoutWidget
-2019-11-05 21:19:36,058 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QGroupBox object at 0x000002268193F8B8>
-2019-11-05 21:19:36,058 DEBUG PyQt5.uic.uiparser pop widget QGroupBox activeFiltersBox
-2019-11-05 21:19:36,058 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002268193F798>
-2019-11-05 21:19:36,059 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,059 DEBUG PyQt5.uic.properties setting property text
-2019-11-05 21:19:36,059 DEBUG PyQt5.uic.uiparser push QCheckBox colorBox
-2019-11-05 21:19:36,059 DEBUG PyQt5.uic.uiparser pop widget QCheckBox colorBox
-2019-11-05 21:19:36,059 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002268193F798>
-2019-11-05 21:19:36,059 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,059 DEBUG PyQt5.uic.properties setting property text
-2019-11-05 21:19:36,060 DEBUG PyQt5.uic.uiparser push QLabel label
-2019-11-05 21:19:36,060 DEBUG PyQt5.uic.uiparser pop widget QLabel label
-2019-11-05 21:19:36,060 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002268193F798>
-2019-11-05 21:19:36,060 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,061 DEBUG PyQt5.uic.uiparser push QLineEdit lineEdit
-2019-11-05 21:19:36,061 DEBUG PyQt5.uic.uiparser pop widget QLineEdit lineEdit
-2019-11-05 21:19:36,061 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002268193F798>
-2019-11-05 21:19:36,061 DEBUG PyQt5.uic.uiparser pop widget QWidget tab
-2019-11-05 21:19:36,061 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QTabWidget object at 0x000002268193F4C8>
-2019-11-05 21:19:36,062 DEBUG PyQt5.uic.uiparser push QWidget tab_2
-2019-11-05 21:19:36,062 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,062 DEBUG PyQt5.uic.uiparser push QListWidget changeListWidget
-2019-11-05 21:19:36,062 DEBUG PyQt5.uic.uiparser pop widget QListWidget changeListWidget
-2019-11-05 21:19:36,063 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002268193FDC8>
-2019-11-05 21:19:36,063 DEBUG PyQt5.uic.uiparser pop widget QWidget tab_2
-2019-11-05 21:19:36,063 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QTabWidget object at 0x000002268193F4C8>
-2019-11-05 21:19:36,187 DEBUG PyQt5.uic.uiparser pop widget QTabWidget tabWidget
-2019-11-05 21:19:36,188 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002268193F678>
-2019-11-05 21:19:36,188 DEBUG PyQt5.uic.uiparser pop widget QWidget centralwidget
-2019-11-05 21:19:36,188 DEBUG PyQt5.uic.uiparser new topwidget <gui.main_window.UbdTool object at 0x0000022681666EE8>
-2019-11-05 21:19:36,192 DEBUG PyQt5.uic.properties setting property geometry
-2019-11-05 21:19:36,192 DEBUG PyQt5.uic.uiparser push QMenuBar menubar
-2019-11-05 21:19:36,193 DEBUG PyQt5.uic.properties setting property title
-2019-11-05 21:19:36,193 DEBUG PyQt5.uic.uiparser push QMenu menuFile
-2019-11-05 21:19:36,193 DEBUG PyQt5.uic.uiparser pop widget QMenu menuFile
-2019-11-05 21:19:36,193 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QMenuBar object at 0x000002268193FE58>
-2019-11-05 21:19:36,193 DEBUG PyQt5.uic.uiparser pop widget QMenuBar menubar
-2019-11-05 21:19:36,193 DEBUG PyQt5.uic.uiparser new topwidget <gui.main_window.UbdTool object at 0x0000022681666EE8>
-2019-11-05 21:19:36,194 DEBUG PyQt5.uic.uiparser push QStatusBar statusbar
-2019-11-05 21:19:36,194 DEBUG PyQt5.uic.uiparser pop widget QStatusBar statusbar
-2019-11-05 21:19:36,194 DEBUG PyQt5.uic.uiparser new topwidget <gui.main_window.UbdTool object at 0x0000022681666EE8>
-2019-11-05 21:19:36,194 DEBUG PyQt5.uic.properties setting property icon
-2019-11-05 21:19:36,196 DEBUG PyQt5.uic.properties setting property text
-2019-11-05 21:19:36,196 DEBUG PyQt5.uic.properties setting property icon
-2019-11-05 21:19:36,197 DEBUG PyQt5.uic.properties setting property text
-2019-11-05 21:19:36,197 DEBUG PyQt5.uic.uiparser pop widget UbdTool MainWindow
-2019-11-05 21:19:36,197 DEBUG PyQt5.uic.uiparser new topwidget None
-2019-11-05 21:19:36,197 DEBUG PyQt5.uic.uiparser add action actionLoad to menuFile
-2019-11-05 21:19:36,198 DEBUG PyQt5.uic.uiparser add action actionSave to menuFile
-2019-11-05 21:19:36,198 DEBUG PyQt5.uic.uiparser add action menuFile to menubar
+2019-11-08 08:31:43,664 DEBUG PyQt5.uic.uiparser uiname is MainWindow
+2019-11-08 08:31:43,664 DEBUG PyQt5.uic.uiparser toplevel widget is UbdTool
+2019-11-08 08:31:43,665 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,665 DEBUG PyQt5.uic.properties setting property windowTitle
+2019-11-08 08:31:43,665 DEBUG PyQt5.uic.properties setting property windowIcon
+2019-11-08 08:31:43,670 DEBUG PyQt5.uic.uiparser push UbdTool MainWindow
+2019-11-08 08:31:43,671 DEBUG PyQt5.uic.uiparser push QWidget centralwidget
+2019-11-08 08:31:43,671 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,672 DEBUG PyQt5.uic.properties setting property currentIndex
+2019-11-08 08:31:43,672 DEBUG PyQt5.uic.properties setting property tabBarAutoHide
+2019-11-08 08:31:43,672 DEBUG PyQt5.uic.uiparser push QTabWidget tabWidget
+2019-11-08 08:31:43,672 DEBUG PyQt5.uic.uiparser push QWidget tab
+2019-11-08 08:31:43,677 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,677 DEBUG PyQt5.uic.uiparser push QTableView inventoryTable
+2019-11-08 08:31:43,677 DEBUG PyQt5.uic.uiparser pop widget QTableView inventoryTable
+2019-11-08 08:31:43,677 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x00000177AE5F7708>
+2019-11-08 08:31:43,678 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,678 DEBUG PyQt5.uic.properties setting property text
+2019-11-08 08:31:43,678 DEBUG PyQt5.uic.uiparser push QPushButton clear_filters
+2019-11-08 08:31:43,678 DEBUG PyQt5.uic.uiparser pop widget QPushButton clear_filters
+2019-11-08 08:31:43,679 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x00000177AE5F7708>
+2019-11-08 08:31:43,679 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,679 DEBUG PyQt5.uic.properties setting property sizePolicy
+2019-11-08 08:31:43,679 DEBUG PyQt5.uic.properties setting property layoutDirection
+2019-11-08 08:31:43,679 DEBUG PyQt5.uic.properties setting property title
+2019-11-08 08:31:43,679 DEBUG PyQt5.uic.properties setting property flat
+2019-11-08 08:31:43,680 DEBUG PyQt5.uic.properties setting property checkable
+2019-11-08 08:31:43,680 DEBUG PyQt5.uic.uiparser push QGroupBox activeFiltersBox
+2019-11-08 08:31:43,680 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,680 DEBUG PyQt5.uic.uiparser push QWidget horizontalLayoutWidget
+2019-11-08 08:31:43,680 DEBUG PyQt5.uic.properties setting property pyuicMargins
+2019-11-08 08:31:43,681 DEBUG PyQt5.uic.uiparser push QHBoxLayout hFilterLayout
+2019-11-08 08:31:43,681 DEBUG PyQt5.uic.uiparser pop layout QHBoxLayout hFilterLayout
+2019-11-08 08:31:43,681 DEBUG PyQt5.uic.uiparser pop widget QWidget horizontalLayoutWidget
+2019-11-08 08:31:43,681 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QGroupBox object at 0x00000177AE5F7828>
+2019-11-08 08:31:43,681 DEBUG PyQt5.uic.uiparser pop widget QGroupBox activeFiltersBox
+2019-11-08 08:31:43,681 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x00000177AE5F7708>
+2019-11-08 08:31:43,681 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,682 DEBUG PyQt5.uic.properties setting property text
+2019-11-08 08:31:43,682 DEBUG PyQt5.uic.uiparser push QCheckBox colorBox
+2019-11-08 08:31:43,682 DEBUG PyQt5.uic.uiparser pop widget QCheckBox colorBox
+2019-11-08 08:31:43,682 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x00000177AE5F7708>
+2019-11-08 08:31:43,682 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,682 DEBUG PyQt5.uic.properties setting property text
+2019-11-08 08:31:43,682 DEBUG PyQt5.uic.uiparser push QLabel label
+2019-11-08 08:31:43,683 DEBUG PyQt5.uic.uiparser pop widget QLabel label
+2019-11-08 08:31:43,683 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x00000177AE5F7708>
+2019-11-08 08:31:43,683 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,683 DEBUG PyQt5.uic.uiparser push QLineEdit lineEdit
+2019-11-08 08:31:43,683 DEBUG PyQt5.uic.uiparser pop widget QLineEdit lineEdit
+2019-11-08 08:31:43,683 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x00000177AE5F7708>
+2019-11-08 08:31:43,684 DEBUG PyQt5.uic.uiparser pop widget QWidget tab
+2019-11-08 08:31:43,684 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QTabWidget object at 0x00000177AE5F7438>
+2019-11-08 08:31:43,684 DEBUG PyQt5.uic.uiparser push QWidget tab_2
+2019-11-08 08:31:43,685 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,685 DEBUG PyQt5.uic.uiparser push QListWidget changeListWidget
+2019-11-08 08:31:43,685 DEBUG PyQt5.uic.uiparser pop widget QListWidget changeListWidget
+2019-11-08 08:31:43,685 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x00000177AE5F7D38>
+2019-11-08 08:31:43,685 DEBUG PyQt5.uic.uiparser pop widget QWidget tab_2
+2019-11-08 08:31:43,685 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QTabWidget object at 0x00000177AE5F7438>
+2019-11-08 08:31:43,803 DEBUG PyQt5.uic.uiparser pop widget QTabWidget tabWidget
+2019-11-08 08:31:43,803 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QWidget object at 0x00000177AE5F75E8>
+2019-11-08 08:31:43,804 DEBUG PyQt5.uic.uiparser pop widget QWidget centralwidget
+2019-11-08 08:31:43,804 DEBUG PyQt5.uic.uiparser new topwidget <gui.main_window.UbdTool object at 0x00000177A53D5EE8>
+2019-11-08 08:31:43,808 DEBUG PyQt5.uic.properties setting property geometry
+2019-11-08 08:31:43,808 DEBUG PyQt5.uic.uiparser push QMenuBar menubar
+2019-11-08 08:31:43,809 DEBUG PyQt5.uic.properties setting property title
+2019-11-08 08:31:43,809 DEBUG PyQt5.uic.uiparser push QMenu menuFile
+2019-11-08 08:31:43,809 DEBUG PyQt5.uic.uiparser pop widget QMenu menuFile
+2019-11-08 08:31:43,809 DEBUG PyQt5.uic.uiparser new topwidget <PyQt5.QtWidgets.QMenuBar object at 0x00000177AE5F7DC8>
+2019-11-08 08:31:43,810 DEBUG PyQt5.uic.uiparser pop widget QMenuBar menubar
+2019-11-08 08:31:43,810 DEBUG PyQt5.uic.uiparser new topwidget <gui.main_window.UbdTool object at 0x00000177A53D5EE8>
+2019-11-08 08:31:43,810 DEBUG PyQt5.uic.uiparser push QStatusBar statusbar
+2019-11-08 08:31:43,810 DEBUG PyQt5.uic.uiparser pop widget QStatusBar statusbar
+2019-11-08 08:31:43,810 DEBUG PyQt5.uic.uiparser new topwidget <gui.main_window.UbdTool object at 0x00000177A53D5EE8>
+2019-11-08 08:31:43,810 DEBUG PyQt5.uic.properties setting property icon
+2019-11-08 08:31:43,812 DEBUG PyQt5.uic.properties setting property text
+2019-11-08 08:31:43,812 DEBUG PyQt5.uic.properties setting property icon
+2019-11-08 08:31:43,814 DEBUG PyQt5.uic.properties setting property text
+2019-11-08 08:31:43,814 DEBUG PyQt5.uic.uiparser pop widget UbdTool MainWindow
+2019-11-08 08:31:43,814 DEBUG PyQt5.uic.uiparser new topwidget None
+2019-11-08 08:31:43,814 DEBUG PyQt5.uic.uiparser add action actionLoad to menuFile
+2019-11-08 08:31:43,814 DEBUG PyQt5.uic.uiparser add action actionSave to menuFile
+2019-11-08 08:31:43,815 DEBUG PyQt5.uic.uiparser add action menuFile to menubar

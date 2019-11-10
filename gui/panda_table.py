@@ -107,3 +107,34 @@ class PandasModel(QtCore.QAbstractTableModel):
             self.layoutAboutToBeChanged.emit()
             self._inventory.sort_by_category(colname, ascending=(order == QtCore.Qt.AscendingOrder))
             self.layoutChanged.emit()
+
+    def item(self, row, column):
+        val = ""
+        try:
+            val = str(self._inventory.working_set.iloc[row, column])
+        except:
+            pass
+
+        return val
+
+    def number_rows(self):
+        """Get number of entries in inventory table
+        
+        Returns:
+            int -- Number of entries
+        """
+        try:
+            return len(self._inventory.working_set.index)
+        except:
+            return 0
+
+    def number_columns(self):
+        """Get number of elements in inventory entry
+        
+        Returns:
+            int -- number of elements
+        """
+        try:
+            return len(self._inventory.working_set.columns)
+        except:
+            return 0

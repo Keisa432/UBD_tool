@@ -85,6 +85,11 @@ class Inventory:
         return self.working_set.columns.tolist()[column]
 
     def delete_filter(self, text):
+        """ Delete active filter
+        
+        Arguments:
+            text {string} -- filter text that should be removed
+        """
         self.active_filters.remove(("", text))
         self.reset_filters()
         self.filter_multiple(self.active_filters)

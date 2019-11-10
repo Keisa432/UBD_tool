@@ -4,7 +4,7 @@ from utils import log_msg
 from .panda_table import PandasModel
 from .change_widget import QChangeWidget
 from .filter_label import FilterLabel
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, QtPrintSupport
 from PyQt5.uic import loadUi
 
 class UbdTool(QtWidgets.QMainWindow):
@@ -45,21 +45,44 @@ class UbdTool(QtWidgets.QMainWindow):
     def init_toolbar_menu(self):
         self.actionLoad.triggered.connect(self.get_file)
         self.actionSave.triggered.connect(self.save_file)
+        self.actionPrint.triggered.connect(self.handle_print)
+        self.actionPrint.setEnabled(False)
 
     def get_file(self):
-        fname, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Load UBD file', '','CSV (*.csv);;All Files (*);;')
+        fname, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Load UBD file','','CSV (*.csv);;All Files (*);;')
         self._inventory.load_data(fname)
         self.csv_loaded.emit()
 
     def save_file(self):
-        fname, _ = QtWidgets.QFileDialog.getSaveFileName(self, 'Save UBD file', '','CSV (*.csv);;All Files (*);;')
+        fname, _ = QtWidgets.QFileDialog.getSaveFileName(self, 'Save UBD file','','CSV (*.csv);;All Files (*);;')
         self._inventory.save_data(fname)
+
+    def handle_print(self):
+        dialog = QtPrintSupport.QPrintDialog()
+        if dialog.exec_() == QtWidgets.QDialog.Accepted:
+            self.handle_paint_request(dialog.printer())
+
+    def handle_paint_request(self, printer):
+        document = QtGui.QTextDocument()
+        cursor = QtGui.QTextCursor(document)
+        tableFormat = QtGui.QTextTableFormat()
+        tableFormat.setBorder(0)
+        tableFormat.setCellSpacing(16)
+        table = cursor.insertTable(
+            self.inventoryTable.model().number_rows(),
+            self.inventoryTable.model().number_columns(),tableFormat)
+        for row in range(table.rows()):
+            for col in range(table.columns()):
+                cursor.insertText(self.inventoryTable.model().item(row, col))
+                cursor.movePosition(QtGui.QTextCursor.NextCell)
+        document.print_(printer)
 
     def populate_ui(self):
         self.init_inventory_table(self._inventory)
         mod = self.inventoryTable.model()
         mod.colors_enabled = self.colorBox.isChecked()
-        mod.data_changed.connect(self.print_change)
+        mod.data_changed.connect(self.track_change)
+        self.actionPrint.setEnabled(True)
 
     def init_filter_ui(self):
         self.lineEdit.returnPressed.connect(self.apply_filter)
@@ -88,10 +111,10 @@ class UbdTool(QtWidgets.QMainWindow):
         mod.layoutChanged.emit()
     
     def delete_filter(self, value):
-       mod = self.inventoryTable.model()
-       mod.layoutAboutToBeChanged.emit()
-       mod._inventory.delete_filter(value)
-       mod.layoutChanged.emit()
+        mod = self.inventoryTable.model()
+        mod.layoutAboutToBeChanged.emit()
+        mod._inventory.delete_filter(value)
+        mod.layoutChanged.emit()
 
     def reset_filters(self):
         mod = self.inventoryTable.model()
@@ -104,7 +127,7 @@ class UbdTool(QtWidgets.QMainWindow):
                 continue
         mod.layoutChanged.emit()
     
-    def print_change(self):
+    def track_change(self):
        change = self._tracker.get_last_change()
        changeWidget = QChangeWidget(change.get_change())
        listWidget = QtWidgets.QListWidgetItem(self.changeListWidget)

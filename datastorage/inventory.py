@@ -52,7 +52,7 @@ class Inventory:
         """Load data farom csv
         """
         try:
-            self.original_data = pd.read_csv(path, self._sep)
+            self.original_data = pd.read_csv(path, sep=None)
             # convert timestamp string to date time
             self.original_data['SLED/BBD'] = pd.to_datetime(self.original_data ['SLED/BBD'])
             # drop last column with nan values

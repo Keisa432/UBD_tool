@@ -7,6 +7,12 @@ from .filter_label import FilterLabel
 from PyQt5 import QtCore, QtGui, QtWidgets, QtPrintSupport
 from PyQt5.uic import loadUi
 
+# Translate asset paths to useable format for PyInstaller
+def resource_path(relative_path):
+  if hasattr(sys, '_MEIPASS'):
+      return os.path.join(sys._MEIPASS, relative_path)
+  return os.path.join(os.path.abspath('.'), relative_path)
+
 class UbdTool(QtWidgets.QMainWindow):
     csv_loaded = QtCore.pyqtSignal()
 
@@ -14,9 +20,9 @@ class UbdTool(QtWidgets.QMainWindow):
         super(UbdTool, self).__init__()
         self._inventory = inventory
         self._tracker = tracker
-        abs_path = os.path.dirname(os.path.abspath(sys.argv[0]))
-        ui_path = os.path.join(abs_path,"gui", "main_window.ui")
-        loadUi(ui_path, self)
+        #abs_path = os.path.dirname(os.path.abspath(sys.argv[0]))
+        #ui_path = os.path.join(abs_path,"gui", "main_window.ui")
+        loadUi(resource_path("./gui/main_window.ui"), self)
         self.setWindowTitle('UBD Tool')
         self.init_toolbar_menu()
         self.init_filter_ui()

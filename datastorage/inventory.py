@@ -2,6 +2,9 @@ import pandas as pd
 from utils import log_msg
 from .change import Change
 
+DATE_COLUMN_NAME = 'SLED/BBD'
+
+
 class Inventory:
     """Inventory class
 
@@ -12,6 +15,7 @@ class Inventory:
     Returns:
         Inventory -- Inventory class
     """
+
     def __init__(self, sep=';'):
         """Inventory constructor
 
@@ -53,10 +57,13 @@ class Inventory:
         """
         try:
             self.original_data = pd.read_csv(path, sep=None)
-            # convert timestamp string to date time
-            self.original_data['SLED/BBD'] = pd.to_datetime(self.original_data ['SLED/BBD'])
+            # convert to data time
+            self.original_data[DATE_COLUMN_NAME] = pd.to_datetime(
+                self.original_data[DATE_COLUMN_NAME])
             # drop last column with nan values
-            self.original_data.dropna(axis=1, thresh=len(self.original_data) - 1, inplace=True)
+            self.original_data.dropna(axis=1,
+                                      thresh=len(self.original_data) - 1,
+                                      inplace=True)
             #set working set to original data
             self.working_set = self.original_data
         except Exception as e:
@@ -117,7 +124,8 @@ class Inventory:
         for filter in filters:
             if filter not in self.active_filters:
                 self.active_filters.append(filter)
-            self.working_set = self.filter_data(self.working_set, filter[0], filter[1])
+            self.working_set = self.filter_data(self.working_set, filter[0],
+                                                filter[1])
         return self.working_set
 
     def filter_data(self, data, cat, val):
@@ -132,8 +140,9 @@ class Inventory:
             Dataframe -- Filtered dataframe
         """
         try:
-            return data[data.apply(lambda row: row.astype(str).
-                        str.contains(val, case=False).any(), axis=1)]
+            return data[data.apply(
+                lambda row: row.astype(str).str.contains(val, case=False).any(),
+                axis=1)]
         except Exception as e:
             log_msg(__name__, 2, e)
 
@@ -153,7 +162,10 @@ class Inventory:
             ascending {bool} -- If True sort in ascending order (default: {True})
         """
         try:
-            self.working_set.sort_values(cat, axis=0, ascending=ascending, inplace=True)
+            self.working_set.sort_values(cat,
+                                         axis=0,
+                                         ascending=ascending,
+                                         inplace=True)
         except Exception as e:
             log_msg(__name__, 2, e)
 

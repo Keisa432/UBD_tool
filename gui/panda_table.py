@@ -3,6 +3,7 @@ from PyQt5 import QtGui
 from datastorage import Inventory
 import pandas as pd
 
+
 class PandasModel(QtCore.QAbstractTableModel):
     data_changed = QtCore.pyqtSignal()
     sled_bbd_offset = 5
@@ -10,11 +11,10 @@ class PandasModel(QtCore.QAbstractTableModel):
     colors_enabled = False
     ROW_LOAD_COUNT = 15
 
-    def __init__(self, inventory, parent=None): 
+    def __init__(self, inventory, parent=None):
         QtCore.QAbstractTableModel.__init__(self, parent=parent)
         self._inventory = inventory
         self._rows_loaded = PandasModel.ROW_LOAD_COUNT
-     
 
     def headerData(self, section, orientation, role=QtCore.Qt.DisplayRole):
         if role != QtCore.Qt.DisplayRole:
@@ -23,13 +23,12 @@ class PandasModel(QtCore.QAbstractTableModel):
         if orientation == QtCore.Qt.Horizontal:
             try:
                 return self._inventory.working_set.columns.tolist()[section]
-            except (IndexError, ):
+            except (IndexError,):
                 return QtCore.QVariant()
         elif orientation == QtCore.Qt.Vertical:
             try:
-                # return self.df.index.tolist()
                 return self._inventory.working_set.index.tolist()[section]
-            except (IndexError, ):
+            except (IndexError,):
                 return QtCore.QVariant()
 
     def data(self, index, role=QtCore.Qt.DisplayRole):
@@ -41,13 +40,15 @@ class PandasModel(QtCore.QAbstractTableModel):
         elif role != QtCore.Qt.DisplayRole:
             return QtCore.QVariant()
 
-        return QtCore.QVariant(str(self._inventory.working_set.iloc[index.row(), index.column()]))
+        return QtCore.QVariant(
+            str(self._inventory.working_set.iloc[index.row(),
+                                                 index.column()]))
 
     def _check_date(self, index):
-        header = self._inventory.working_set.columns.tolist()[self.sled_bbd_offset]
         color = QtCore.QVariant()
         today = pd.to_datetime('today')
-        difference = self._inventory.working_set.iloc[index.row(), self.sled_bbd_offset] - today
+        difference = self._inventory.working_set.iloc[
+            index.row(), self.sled_bbd_offset] - today
         if difference.days < 90:
             color = QtGui.QBrush(QtCore.Qt.red)
         elif difference.days < 365:
@@ -61,10 +62,6 @@ class PandasModel(QtCore.QAbstractTableModel):
             value = value.toPyObject()
         else:
             pass
-            # PySide gets an unicode
-            #dtype = self._df[col].dtype
-           # if dtype != object:
-           #     value = None if value == '' else dtype.type(value)
         self._inventory.change_data_entry(index.row(), index.column(), value)
         self.data_changed.emit()
         return True
@@ -76,14 +73,13 @@ class PandasModel(QtCore.QAbstractTableModel):
             flags |= (QtCore.Qt.ItemIsEditable)
         return flags
 
-
-    def rowCount(self, parent=QtCore.QModelIndex()): 
+    def rowCount(self, parent=QtCore.QModelIndex()):
         if len(self._inventory.working_set.index) <= self._rows_loaded:
             return len(self._inventory.working_set.index)
         else:
             return self._rows_loaded
 
-    def columnCount(self, parent=QtCore.QModelIndex()): 
+    def columnCount(self, parent=QtCore.QModelIndex()):
         return len(self._inventory.working_set.columns)
 
     def canFetchMore(self, index=QtCore.QModelIndex):
@@ -91,21 +87,23 @@ class PandasModel(QtCore.QAbstractTableModel):
             return True
         else:
             return False
-    
+
     def fetchMore(self, index=QtCore.QModelIndex):
         remainder = len(self._inventory.working_set.index) - self._rows_loaded
         itemNum = min(remainder, PandasModel.ROW_LOAD_COUNT)
         self.layoutAboutToBeChanged.emit()
-        self.beginInsertRows(QtCore.QModelIndex(), self._rows_loaded, self._rows_loaded + itemNum - 1)
+        self.beginInsertRows(QtCore.QModelIndex(), self._rows_loaded,
+                             self._rows_loaded + itemNum - 1)
         self._rows_loaded += itemNum
         self.endInsertRows()
         self.layoutChanged.emit()
 
     def sort(self, column, order):
-        if(column is not -1):
+        if (column is not -1):
             colname = self._inventory.get_column_name(column)
             self.layoutAboutToBeChanged.emit()
-            self._inventory.sort_by_category(colname, ascending=(order == QtCore.Qt.AscendingOrder))
+            self._inventory.sort_by_category(
+                colname, ascending=(order == QtCore.Qt.AscendingOrder))
             self.layoutChanged.emit()
 
     def item(self, row, column):

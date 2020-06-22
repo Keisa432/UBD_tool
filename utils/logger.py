@@ -8,7 +8,8 @@ logging_path = os.path.join(abs_path, "ubd_log.txt")
 if os.path.exists(logging_path):
     os.remove(logging_path)
 
-logging.basicConfig(filename=logging_path, level=logging.DEBUG, 
+logging.basicConfig(filename=logging_path,
+                    level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 

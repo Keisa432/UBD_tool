@@ -4,6 +4,7 @@ from utils import log_msg
 from .panda_table import PandasModel
 from .change_widget import QChangeWidget
 from .filter_label import FilterLabel
+from .message_box import show_message_box
 from PyQt5 import QtCore, QtGui, QtWidgets, QtPrintSupport
 from PyQt5.uic import loadUi
 
@@ -98,8 +99,11 @@ class UbdTool(QtWidgets.QMainWindow):
         """
         fname, _ = QtWidgets.QFileDialog.getOpenFileName(
             self, 'Load UBD file', '', 'CSV (*.csv);;All Files (*);;')
-        self._inventory.load_data(fname)
-        self.csv_loaded.emit()
+        try:
+            self._inventory.load_data(fname)
+            self.csv_loaded.emit()
+        except Exception as e:
+            show_message_box(e)
 
     def save_file(self):
         """ Save file
@@ -154,6 +158,7 @@ class UbdTool(QtWidgets.QMainWindow):
             model.colors_enabled = not model.colors_enabled
             model.layoutChanged.emit()
         except Exception as e:
+            show_message_box(e)
             log_msg(__name__, 2, e)
 
     def apply_filter(self):

@@ -68,6 +68,7 @@ class Inventory:
             self.working_set = self.original_data
         except Exception as e:
             log_msg(__name__, 2, e)
+            raise e
 
     def save_data(self, path):
         """Save data to csv
